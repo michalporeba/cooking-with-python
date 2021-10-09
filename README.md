@@ -4,7 +4,7 @@ From zero to hero in Python, step at a time.
 
 # Steps
 
-# Step 01
+## Step 01
 
 Objective: Basic command line application in python
 
@@ -14,3 +14,9 @@ Some extra things to consider:
 * Some recipes should not have a description at all. Make sure the application still works well. 
 * What is the user enters number not only the list? Or perhaps not a number at all? 
 * Can you make the application ask the question multiple times? 
+
+## Step 02 
+
+Objective: Read recipes data from a simple text file
+
+Extend the previous application so that the recipes data is read from a text file of some sort. Try making up a data format. 
