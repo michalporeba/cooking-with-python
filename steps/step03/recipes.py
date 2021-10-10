@@ -1,4 +1,5 @@
 recipes = []
+has_changes = False
 
 with open('recipes.rd1') as f: 
     recipe = {}
@@ -62,33 +63,55 @@ def collect_recipe() -> dict:
         recipe['ingredients'].append(ingredient)
     return recipe 
 
+def save_changes(recipes: list):
+    newline = '\n'
+    with open('recipes.rd1', 'w') as f: 
+        for recipe in recipes: 
+            f.write(f"n: {recipe['name']}"+newline)
+            for desc in recipe['description']: 
+                f.write(f"d: {desc}"+newline)
+            for ingredient in recipe['ingredients']: 
+                f.write(f"i: {ingredient}"+newline)
+
+def update_recipes_with(recipe: dict):
+    while True:
+        if recipe: 
+            existing = next((r for r in recipes if r['name'] == recipe['name']), None)
+            if existing:
+                while True: 
+                    print(f"We already have a recipe for '{recipe['name']}'. Do you want to replace it? (say 'yes' or 'no'): ")
+                    choice = input().strip()
+                    if choice == 'yes':
+                        recipes.remove(existing)
+                        break
+                    elif choice == 'no':                     
+                        newname = input("Save the new recipe as: ").strip()
+                        if newname:
+                            recipe['name'] = newname
+                            break 
+            else: 
+                recipes.append(recipe)
+                break
+
 # the main application loop. keep going until it is time to end
 while True: 
     display_recipes()
     (action, recipe_id) = get_users_choice(len(recipes))
     if action == 'exit': 
+        if has_changes:
+            while True: 
+                choice = input('Do you want to save changes to recipes.rd1? (yes or no): ').strip()
+                if choice == 'yes':
+                    save_changes(recipes)
+                    break
+                elif choice == 'no':
+                    break 
         print("\nThank your for cooking with Python. Goodbye.")
         break  
     if action == 'see':
         display_recipe(recipes[recipe_id])
     elif action == 'add':
-        recipe = collect_recipe()
-        while True:
-            if recipe: 
-                existing = next((r for r in recipes if r['name'] == recipe['name']), None)
-                if existing:
-                    while True: 
-                        print(f"We already have a recipe for '{recipe['name']}'. Do you want to replace it? (say 'yes' or 'no'): ")
-                        choice = input().strip()
-                        if choice == 'yes':
-                            recipes.remove(existing)
-                            break
-                        elif choice == 'no':                     
-                            newname = input("Save the new recipe as: ").strip()
-                            if newname:
-                                recipe['name'] = newname
-                                break 
-                else: 
-                    recipes.append(recipe)
-                    break
+        update_recipes_with(collect_recipe())
+        has_changes = True 
+        
     print("\n\nLet's try again!\n")
