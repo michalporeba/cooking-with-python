@@ -68,13 +68,27 @@ while True:
     (action, recipe_id) = get_users_choice(len(recipes))
     if action == 'exit': 
         print("\nThank your for cooking with Python. Goodbye.")
-        break; 
-    
+        break  
     if action == 'see':
         display_recipe(recipes[recipe_id])
     elif action == 'add':
         recipe = collect_recipe()
-        if recipe: 
-            recipes.append(recipe)
-
+        while True:
+            if recipe: 
+                existing = next((r for r in recipes if r['name'] == recipe['name']), None)
+                if existing:
+                    while True: 
+                        print(f"We already have a recipe for '{recipe['name']}'. Do you want to replace it? (say 'yes' or 'no'): ")
+                        choice = input().strip()
+                        if choice == 'yes':
+                            recipes.remove(existing)
+                            break
+                        elif choice == 'no':                     
+                            newname = input("Save the new recipe as: ").strip()
+                            if newname:
+                                recipe['name'] = newname
+                                break 
+                else: 
+                    recipes.append(recipe)
+                    break
     print("\n\nLet's try again!\n")
