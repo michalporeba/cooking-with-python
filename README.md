@@ -20,3 +20,18 @@ Some extra things to consider:
 Objective: Read recipes data from a simple text file
 
 Extend the previous application so that the recipes data is read from a text file of some sort. Try making up a data format. 
+Data is often stored in database, or 'serialised' to formats like BSON, JSON or CSV, but let's not use those just yet. A plain text file will do. 
+
+## Step 03
+
+Objective: Create a new recipe
+
+At the moment, to add a new recipe we can edit the recipes files and restart the application. Most applications allows users to modify the data without the need to directly modify their data file. Let's change our cook book application so that we can new recipes at runtime. For now, without saving. 
+
+Things to consider: 
+* What will the user interface be? 
+* What if we try to add a recipe for something already existing? How would we know that? 
+
+Extra things to consider: 
+* How about allowing updates too? 
+* Can you update the file so we don't have to re-enter the data every time we start the application? 
