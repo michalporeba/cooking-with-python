@@ -35,3 +35,16 @@ Things to consider:
 Extra things to consider: 
 * How about allowing updates too? 
 * Can you update the file so we don't have to re-enter the data every time we start the application? 
+
+## Step 04
+
+Objective: Support multiple file types 
+
+Let's make up another simple file format. For now, let's try to keep all the code in the same file for 'simplicity' (or rather to see how quickly things get out of hand). 
+
+Things to consdier: 
+* With multiple file formats it makes sense to expect multiple data files. How can we choose which one to open without changing the code? 
+
+Extra things to consdier: 
+* What if there is no data file? 
+* If we wanted to offer the user choice of the recipes book to open, can we add a description rather than just showing the file names? 
