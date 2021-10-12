@@ -1,6 +1,11 @@
+import sys
+
 recipes = []
 has_changes = False
-filename = 'recipes.rd2'
+filename = 'recipes.rd1'
+
+if (len(sys.argv)>1):
+    filename = sys.argv[1]
 
 if filename.endswith('.rd1'):
     with open(filename) as f: 
@@ -116,7 +121,6 @@ def update_recipes_with(recipe: dict):
             else: 
                 recipes.append(recipe)
                 break
-
 # the main application loop. keep going until it is time to end
 while True: 
     display_recipes()
