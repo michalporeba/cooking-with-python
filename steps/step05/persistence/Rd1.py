@@ -23,4 +23,10 @@ class Rd1(RecipeStore):
         return recipes
 
     def save_all(self, file: io.TextIOWrapper, recipes: list):
-        pass
+        newline = '\n'
+        for recipe in recipes: 
+            file.write(f"n: {recipe['name']}"+newline)
+            for desc in recipe['description']: 
+                file.write(f"d: {desc}"+newline)
+            for ingredient in recipe['ingredients']: 
+                file.write(f"i: {ingredient}"+newline)

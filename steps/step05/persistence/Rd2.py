@@ -5,7 +5,7 @@ class Rd2(RecipeStore):
     def read_all(self, file: io.TextIOWrapper) -> list:
         recipes = []
         while True: 
-            line = f.readline()
+            line = file.readline()
             if not line:
                 break
             (description_lines, ingredients, name) = line.split(' ', 2)
@@ -18,4 +18,10 @@ class Rd2(RecipeStore):
         return recipes
 
     def save_all(self, file: io.TextIOWrapper, recipes: list):
-        pass
+        newline = '\n'
+        for recipe in recipes: 
+            file.write(f"{len(recipe['description'])} {len(recipe['ingredients'])} {recipe['name']}"+newline)
+            for desc in recipe['description']: 
+                file.write(f"{desc}"+newline)
+            for ingredient in recipe['ingredients']: 
+                file.write(f"{ingredient}"+newline)

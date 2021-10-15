@@ -13,7 +13,6 @@ def write_to(connection: str, recipes: list):
     with open(connection, 'w') as f:
         store.save_all(f, recipes)
 
-
 def __get_store(connection: str) -> RecipeStore: 
     if not os.path.isfile(connection):
         raise FileNotFoundError(connection)

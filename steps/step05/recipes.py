@@ -10,7 +10,6 @@ if (len(sys.argv)>1):
 
 recipes = pf.read_from(filename)
         
-        
 def display_recipes() -> dict:
     print("Available recipes:")
     for i, recipe in enumerate(recipes):
@@ -54,25 +53,7 @@ def collect_recipe() -> dict:
             break 
         recipe['ingredients'].append(ingredient)
     return recipe 
-
-def save_changes(recipes: list):
-    newline = '\n'
-    with open(filename, 'w') as f: 
-        if filename.endswith('rd1'):
-            for recipe in recipes: 
-                f.write(f"n: {recipe['name']}"+newline)
-                for desc in recipe['description']: 
-                    f.write(f"d: {desc}"+newline)
-                for ingredient in recipe['ingredients']: 
-                    f.write(f"i: {ingredient}"+newline)
-        if filename.endswith('rd2'):
-            for recipe in recipes: 
-                f.write(f"{len(recipe['description'])} {len(recipe['ingredients'])} {recipe['name']}"+newline)
-                for desc in recipe['description']: 
-                    f.write(f"{desc}"+newline)
-                for ingredient in recipe['ingredients']: 
-                    f.write(f"{ingredient}"+newline)
-
+            
 def update_recipes_with(recipe: dict):
     while True:
         if recipe: 
@@ -101,7 +82,7 @@ while True:
             while True: 
                 choice = input('Do you want to save changes to recipes.rd1? (yes or no): ').strip()
                 if choice == 'yes':
-                    save_changes(recipes)
+                    pf.write_to(filename, recipes)
                     break
                 elif choice == 'no':
                     break 
