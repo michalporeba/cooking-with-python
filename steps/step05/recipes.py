@@ -1,5 +1,6 @@
 import sys
 from persistence import functions as pf
+from ui import functions as ui
 
 recipes = []
 has_changes = False
@@ -9,11 +10,6 @@ if (len(sys.argv)>1):
     filename = sys.argv[1]
 
 recipes = pf.read_from(filename)
-        
-def display_recipes() -> dict:
-    print("Available recipes:")
-    for i, recipe in enumerate(recipes):
-        print(f"\t{i+1} - {recipe['name']}")
 
 def get_users_choice(number_of_recipes: int) -> (str, int): 
     while True:
@@ -27,32 +23,6 @@ def get_users_choice(number_of_recipes: int) -> (str, int):
             return ('see', int(choice)-1)
 
         print(f"The number must be between 1 and {number_of_recipes}!")
-
-def display_recipe(recipe):
-    newline = '\n'
-    print(f"\nThe {recipe.get('name', 'UNKNOWN')}: {newline.join(recipe.get('description', ['NO DESCRIPTION']))}")
-    print("\nTo make it you will need:")
-    for ingredient in recipe.get('ingredients', []):
-        print(f"\t{ingredient}")
-
-def collect_recipe() -> dict:
-    recipe = { 'description': [], 'ingredients': []}
-    print("Adding a new recipe for: ", end='')
-    name = input().strip()
-    if not name: 
-        return None
-    recipe['name'] = name 
-    while True: 
-        description = input("description: ").strip()
-        if not description:
-            break 
-        recipe['description'].append(description)
-    while True: 
-        ingredient = input("ingredient: ").strip()
-        if not ingredient:
-            break 
-        recipe['ingredients'].append(ingredient)
-    return recipe 
             
 def update_recipes_with(recipe: dict):
     while True:
@@ -75,7 +45,7 @@ def update_recipes_with(recipe: dict):
                 break
 # the main application loop. keep going until it is time to end
 while True: 
-    display_recipes()
+    ui.display_recipes(recipes)
     (action, recipe_id) = get_users_choice(len(recipes))
     if action == 'exit': 
         if has_changes:
@@ -89,9 +59,9 @@ while True:
         print("\nThank your for cooking with Python. Goodbye.")
         break  
     if action == 'see':
-        display_recipe(recipes[recipe_id])
+        ui.display_recipe(recipes[recipe_id])
     elif action == 'add':
-        update_recipes_with(collect_recipe())
+        update_recipes_with(ui.collect_recipe())
         has_changes = True 
         
     print("\n\nLet's try again!\n")
