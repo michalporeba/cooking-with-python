@@ -40,7 +40,7 @@ if filename.endswith('.rd2'):
                 recipe['ingredients'].append(f.readline().strip())
             recipes.append(recipe)
         
-def display_recipes() -> dict:
+def display_recipes():
     print("Available recipes:")
     for i, recipe in enumerate(recipes):
         print(f"\t{i+1} - {recipe['name']}")
