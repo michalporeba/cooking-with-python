@@ -1,8 +1,8 @@
 # the data - for now hardcoded three recipes
 recipes = [
-    { 'name': "lemon cake", 'description': "a cake with a lemon"},
-    { 'name': "brownie", 'description': "a simple cake with chocolate"},
-    { 'name': "cookie"} # there is no description, so we can test this behaviour
+    { "name": "lemon cake", "description": "a cake with a lemon"},
+    { "name": "brownies", "description": "a simple cake with chocolate"},
+    { "name": "cookie"} # there is no description, so we can test this behaviour
 ]
 
 def display_recipes():
