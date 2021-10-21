@@ -48,3 +48,7 @@ Things to consdier:
 Extra things to consdier: 
 * What if there is no data file? 
 * If we wanted to offer the user choice of the recipes book to open, can we add a description rather than just showing the file names? 
+
+## Step 05
+
+Refactoring. By now the code is getting out of hand. It is time to do some refactoring
