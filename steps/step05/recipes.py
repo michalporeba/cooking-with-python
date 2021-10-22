@@ -11,6 +11,17 @@ if (len(sys.argv)>1):
 
 recipes = pf.read_from(filename)
 
+def do(prompt, actions):
+    options = ", ".join(actions.keys())
+    while True: 
+        print(f"{prompt} ({options}): ", end='')
+        choice = input()
+        action = next(iter([v for k,v in actions.items() if k == choice] +  
+            [v for k,v in actions.items() if choice and k.startswith(choice)]), None)
+        if action:
+            action()
+            break
+
 def get_users_choice(number_of_recipes: int) -> (str, int): 
     while True:
         print("\n(choose recipe number to see it, type 'add' to add a new one, or press enter to exit)")
