@@ -1,8 +1,19 @@
-def do(actions):
-    for i, (k,v) in enumerate(actions.items()): 
-        print(f"{i+1}) {k}")
+def do(prompt, actions):
+    options = ", ".join(actions.keys())
+    while True: 
+        print(f"{prompt} ({options}): ", end='')
+        choice = input()
+        action = next(iter([v for k,v in actions.items() if k == choice] +  
+            [v for k,v in actions.items() if choice and k.startswith(choice)]), None)
+        if action:
+            action()
+            break
 
-do({
-    'Option 1': lambda : print('a'),
-    'Option 2': lambda : print('b')
+
+
+do('Choose what you want', {
+    'yes': lambda : print('yes was selected'),
+    'no': lambda : print('no was selected')
 })
+
+
